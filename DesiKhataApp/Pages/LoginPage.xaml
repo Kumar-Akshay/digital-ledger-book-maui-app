@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DesiKhataApp.Pages.LoginPage"
+             Title="Login">
+    
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="25" VerticalOptions="Center">
+            <Image
+                Source="dotnet_bot.png"
+                HeightRequest="150"
+                Aspect="AspectFit"
+                HorizontalOptions="Center" />
+
+            <Label
+                Text="DesiKhata App"
+                Style="{StaticResource Headline}"
+                SemanticProperties.HeadingLevel="Level1"
+                HorizontalOptions="Center" />
+
+            <Label
+                Text="Login to your account"
+                Style="{StaticResource SubHeadline}"
+                HorizontalOptions="Center"
+                Margin="0,0,0,20" />
+
+            <Entry
+                x:Name="EmailEntry"
+                Placeholder="Email"
+                Keyboard="Email"
+                Margin="0,0,0,10" />
+
+            <Entry
+                x:Name="PasswordEntry"
+                Placeholder="Password"
+                IsPassword="True"
+                Margin="0,0,0,20" />
+
+            <Button
+                x:Name="LoginBtn"
+                Text="Login" 
+                Clicked="OnLoginClicked"
+                HorizontalOptions="Fill" />
+
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
+                <Label Text="Don't have an account?" VerticalOptions="Center" />
+                <Label Text="Sign Up" TextColor="{StaticResource Primary}" TextDecorations="Underline">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnSignUpTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Rupee symbol in foreground -->
+  <text x="256" y="290" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="240" fill="#c62828">₹</text>
+</svg>

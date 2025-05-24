@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Rupee symbol as path instead of text -->
+  <path d="M215,200h80v20h-60c40,20 60,40 60,80c0,40 -20,60 -60,80h60v20h-80v40h-40v-40h-60v-20h60c-40,-20 -60,-40 -60,-80c0,-40 20,-60 60,-80h-60v-20h60v-40h40v40z" fill="#c62828" />
+</svg>

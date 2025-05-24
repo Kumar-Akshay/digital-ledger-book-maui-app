@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:DesiKhataApp.Models"
+             xmlns:pages="clr-namespace:DesiKhataApp.Pages"
+             x:Class="DesiKhataApp.Pages.CustomerDetailsPage"
+             Title="Customer Details">
+
+    <Grid RowDefinitions="Auto, *">
+        <!-- Customer Header -->
+        <VerticalStackLayout Grid.Row="0" Padding="20" Spacing="5">
+            <Label 
+                x:Name="CustomerNameLabel"
+                Text="Customer Name"
+                FontSize="24"
+                FontAttributes="Bold"
+                HorizontalOptions="Center" />
+                
+            <Label
+                x:Name="CustomerPhoneLabel"
+                Text="Phone Number"
+                FontSize="16"
+                HorizontalOptions="Center" />
+
+            <Grid ColumnDefinitions="*, *" Margin="0,10,0,0">
+                <Border Grid.Column="0" StrokeThickness="1" Stroke="LightGray" BackgroundColor="#f0f0f0" Margin="5">
+                    <VerticalStackLayout Padding="10">
+                        <Label Text="YOU GAVE" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#c62828" />
+                        <Label x:Name="YouGaveTotalLabel" Text="₹0.00" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#c62828" />
+                    </VerticalStackLayout>
+                </Border>
+                
+                <Border Grid.Column="1" StrokeThickness="1" Stroke="LightGray" BackgroundColor="#f0f0f0" Margin="5">
+                    <VerticalStackLayout Padding="10">
+                        <Label Text="YOU GOT" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#2e7d32" />
+                        <Label x:Name="YouGotTotalLabel" Text="₹0.00" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#2e7d32" />
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+            
+            <Label 
+                Text="Current Balance:" 
+                Margin="0,15,0,0"
+                HorizontalOptions="Center" />
+                
+            <Label 
+                x:Name="BalanceLabel"
+                Text="₹0.00" 
+                FontSize="24"
+                FontAttributes="Bold"
+                HorizontalOptions="Center" />
+        </VerticalStackLayout>
+        
+        <!-- Entries List and Action Buttons -->
+        <Grid Grid.Row="1" RowDefinitions="*, Auto">
+            <Border Grid.Row="0" StrokeThickness="1" Stroke="LightGray" Margin="10,0,10,10">
+                <Grid RowDefinitions="Auto, Auto, *">
+                    <!-- Header -->
+                    <Label
+                        Grid.Row="0"
+                        Text="Entries"
+                        FontSize="18"
+                        FontAttributes="Bold"
+                        BackgroundColor="#f5f5f5"
+                        Padding="10" />
+                        
+                    <!-- Column Headers -->
+                    <Grid Grid.Row="1" ColumnDefinitions="3*, Auto, Auto" Padding="10,5" BackgroundColor="#f9f9f9">
+                        <Label Grid.Column="0" Text="Transaction Details" FontAttributes="Bold" />
+                        <Label Grid.Column="1" Text="You Gave" FontAttributes="Bold" TextColor="#c62828" WidthRequest="100" HorizontalTextAlignment="End" Margin="10,0" />
+                        <Label Grid.Column="2" Text="You Got" FontAttributes="Bold" TextColor="#2e7d32" WidthRequest="100" HorizontalTextAlignment="End" />
+                    </Grid>
+                    
+                    <!-- Divider -->
+                    <BoxView Grid.Row="2" HeightRequest="1" BackgroundColor="#e0e0e0" VerticalOptions="Start" />
+                        
+                    <CollectionView
+                        Grid.Row="2"
+                        x:Name="EntriesCollection"
+                        ItemsSource="{Binding Entries}"
+                        x:DataType="pages:CustomerDetailsPage"
+                        EmptyView="No entries yet. Use the buttons below to add some.">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:CustomerEntry">
+                                <Grid RowDefinitions="Auto, Auto">
+                                    <!-- Entry Content with fixed column widths -->
+                                    <Grid Grid.Row="0" ColumnDefinitions="3*, Auto, Auto" Padding="10,8">
+                                        <!-- First column: Transaction details -->
+                                        <VerticalStackLayout Grid.Column="0" Spacing="3">
+                                            <!-- Date -->
+                                            <Label 
+                                                Text="{Binding Date, StringFormat='{0:ddd, dd MMM yy • h:mm tt}'}" 
+                                                FontAttributes="Bold" 
+                                                FontSize="14" 
+                                                LineBreakMode="NoWrap" />
+                                            
+                                            <!-- Description -->
+                                            <Label 
+                                                Text="{Binding Description}" 
+                                                FontSize="14" 
+                                                LineBreakMode="WordWrap" />
+                                                
+                                            <!-- Balance -->
+                                            <Label 
+                                                Text="{Binding Balance, StringFormat='Bal. ₹{0:N0}'}" 
+                                                TextColor="#757575"
+                                                FontSize="14" />
+                                        </VerticalStackLayout>
+                                        
+                                        <!-- Second column: You Gave -->
+                                        <StackLayout Grid.Column="1" WidthRequest="100" HorizontalOptions="End" VerticalOptions="Start" Margin="10,0">
+                                            <Label 
+                                                Text="{Binding YouGave, StringFormat='{0:N0}'}" 
+                                                IsVisible="{Binding YouGave, Converter={StaticResource GreaterThanZeroConverter}}"
+                                                TextColor="#c62828"
+                                                FontAttributes="Bold"
+                                                FontSize="16"
+                                                HorizontalOptions="End" />
+                                        </StackLayout>
+                                        
+                                        <!-- Third column: You Got -->
+                                        <StackLayout Grid.Column="2" WidthRequest="100" HorizontalOptions="End" VerticalOptions="Start">
+                                            <Label 
+                                                Text="{Binding YouGot, StringFormat='{0:N0}'}" 
+                                                IsVisible="{Binding YouGot, Converter={StaticResource GreaterThanZeroConverter}}"
+                                                TextColor="#2e7d32"
+                                                FontAttributes="Bold"
+                                                FontSize="16"
+                                                HorizontalOptions="End" />
+                                        </StackLayout>
+                                        
+                                        <!-- Vertical grid lines -->
+                                        <BoxView Grid.Column="1" 
+                                                 WidthRequest="1" BackgroundColor="#e0e0e0" 
+                                                 HorizontalOptions="Start" VerticalOptions="Fill" />
+                                        <BoxView Grid.Column="2" 
+                                                 WidthRequest="1" BackgroundColor="#e0e0e0" 
+                                                 HorizontalOptions="Start" VerticalOptions="Fill" />
+                                    </Grid>
+                                    
+                                    <!-- Horizontal divider between entries -->
+                                    <BoxView Grid.Row="1" HeightRequest="1" BackgroundColor="#e0e0e0" HorizontalOptions="Fill" />
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Grid>
+            </Border>
+            
+            <!-- Action Buttons -->
+            <Grid Grid.Row="1" ColumnDefinitions="*, *" Padding="10">
+                <Button 
+                    Grid.Column="0" 
+                    Text="YOU GAVE" 
+                    BackgroundColor="#c62828" 
+                    TextColor="White"
+                    Clicked="OnYouGaveClicked"
+                    Margin="5" />
+                    
+                <Button 
+                    Grid.Column="1" 
+                    Text="YOU GOT" 
+                    BackgroundColor="#2e7d32" 
+                    TextColor="White"
+                    Clicked="OnYouGotClicked"
+                    Margin="5" />
+            </Grid>
+        </Grid>
+    </Grid>
+</ContentPage>

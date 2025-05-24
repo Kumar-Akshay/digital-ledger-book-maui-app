@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:DesiKhataApp.Pages"
+             x:Class="DesiKhataApp.Pages.BusinessListPage"
+             xmlns:models="clr-namespace:DesiKhataApp.Models"
+             Title="My Businesses">
+    
+    <Grid RowDefinitions="Auto, *">
+        <!-- Header with Add Business Button -->
+        <VerticalStackLayout Grid.Row="0" Padding="20,10">
+            <Label 
+                Text="Your Businesses"
+                FontSize="24"
+                FontAttributes="Bold"
+                HorizontalOptions="Center" />
+                
+            <Button 
+                x:Name="AddBusinessButton"
+                Text="+ Add New Business" 
+                Clicked="OnAddBusinessClicked"
+                Margin="0,10,0,0"
+                HorizontalOptions="Fill" />
+        </VerticalStackLayout>
+        
+        <!-- Business List -->
+        <Grid Grid.Row="1" RowDefinitions="*, Auto">
+            <RefreshView x:Name="BusinessesRefreshView" IsRefreshing="False" RefreshColor="{StaticResource Primary}" Command="{Binding RefreshCommand}" x:DataType="pages:BusinessListPage">
+                <CollectionView x:Name="BusinessesCollection" ItemsSource="{Binding Businesses}" 
+                                SelectionMode="Single" SelectionChanged="OnBusinessSelected" x:DataType="pages:BusinessListPage">
+                    <CollectionView.EmptyView>
+                        <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                            <Image Source="dotnet_bot.png" HeightRequest="100" Opacity="0.5" />
+                            <Label Text="No businesses yet" FontSize="18" Opacity="0.5" Margin="0,10,0,0" />
+                            <Label Text="Tap '+ Add New Business' to get started" FontSize="14" Opacity="0.5" />
+                        </VerticalStackLayout>
+                    </CollectionView.EmptyView>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Business">
+                            <Border Stroke="LightGray" StrokeThickness="1" Margin="10,5" Padding="15" BackgroundColor="White">
+                                <Grid ColumnDefinitions="*, Auto">
+                                    <VerticalStackLayout Grid.Column="0">
+                                        <Label Text="{Binding Name}" FontSize="18" FontAttributes="Bold" />
+                                        <Label Text="{Binding PhoneNumber}" FontSize="14" TextColor="Gray" />
+                                        <Label Text="{Binding CreatedAt, StringFormat='{0:MMM dd, yyyy}'}" FontSize="12" TextColor="LightGray" />
+                                    </VerticalStackLayout>
+                                    <Image Grid.Column="1" 
+                                           Source="dotnet_bot.png" 
+                                           HeightRequest="50" 
+                                           WidthRequest="50"
+                                           VerticalOptions="Center" />
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+            
+            <!-- Back button -->
+            <Button Grid.Row="1"
+                x:Name="LogoutButton"
+                Text="Logout" 
+                Clicked="OnLogoutClicked"
+                Margin="20,10,20,20"
+                BackgroundColor="#f44336"
+                TextColor="White" />
+        </Grid>
+    </Grid>
+</ContentPage>

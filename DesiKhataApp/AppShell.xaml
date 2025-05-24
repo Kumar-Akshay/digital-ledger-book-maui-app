@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="DesiKhataApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:DesiKhataApp"
+    xmlns:pages="clr-namespace:DesiKhataApp.Pages"
+    Title="DesiKhata"
+    BackgroundColor="#2e7d32"
+    ForegroundColor="#ffffff"
+    TitleColor="#ffffff">    <FlyoutItem Route="MainPage" FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent
+            Title="Home"
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Route="MainPage" />        <ShellContent
+            Title="Business List"
+            ContentTemplate="{DataTemplate pages:BusinessListPage}"
+            Route="BusinessListPage" />
+        <ShellContent
+            Title="Business Details"
+            ContentTemplate="{DataTemplate pages:BusinessDetailsPage}"
+            Route="BusinessDetailsPage" />
+    </FlyoutItem>
+
+    <ShellContent
+        Title="Login"
+        ContentTemplate="{DataTemplate pages:LoginPage}"
+        Route="LoginPage"
+        Shell.FlyoutItemIsVisible="false"
+        Shell.FlyoutBehavior="Disabled" />
+
+    <ShellContent
+        Title="Sign Up"
+        ContentTemplate="{DataTemplate pages:SignupPage}"
+        Route="SignupPage"
+        Shell.FlyoutItemIsVisible="false"
+        Shell.FlyoutBehavior="Disabled"/>
+
+</Shell>

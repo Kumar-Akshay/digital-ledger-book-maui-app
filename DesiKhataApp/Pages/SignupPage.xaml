@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DesiKhataApp.Pages.SignupPage"
+             Title="Sign Up">
+    
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="25" VerticalOptions="Center">
+            <Image
+                Source="dotnet_bot.png"
+                HeightRequest="120"
+                Aspect="AspectFit"
+                HorizontalOptions="Center" />
+
+            <Label
+                Text="Create Account"
+                Style="{StaticResource Headline}"
+                SemanticProperties.HeadingLevel="Level1"
+                HorizontalOptions="Center" />
+
+            <Entry
+                x:Name="NameEntry"
+                Placeholder="Full Name"
+                Margin="0,0,0,10" />
+                
+            <Entry
+                x:Name="EmailEntry"
+                Placeholder="Email"
+                Keyboard="Email"
+                Margin="0,0,0,10" />
+
+            <Entry
+                x:Name="PasswordEntry"
+                Placeholder="Password"
+                IsPassword="True"
+                Margin="0,0,0,10" />
+                
+            <Entry
+                x:Name="ConfirmPasswordEntry"
+                Placeholder="Confirm Password"
+                IsPassword="True"
+                Margin="0,0,0,20" />
+
+            <Button
+                x:Name="SignUpBtn"
+                Text="Sign Up" 
+                Clicked="OnSignUpClicked"
+                HorizontalOptions="Fill" />
+
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
+                <Label Text="Already have an account?" VerticalOptions="Center" />
+                <Label Text="Login" TextColor="{StaticResource Primary}" TextDecorations="Underline">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnLoginTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
